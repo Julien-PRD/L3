@@ -1,0 +1,19 @@
+Julie PROUDY
+
+Besoins fonctionnels
+
+- Pouvoir se deplacer entre les étages (monter et descendre)
+- Pouvoir prendre un compte la demande d'étage d'un usager
+- Connaitre l'etat de la porte
+- Ouvrir la porte
+- Fermer la porte
+- Allumer le voyant
+- Eteindre le voyant
+- Declancher l'alarme en cas de panne
+
+Besoins non fonctionels
+
+- Le bloquer
+- Une vitesse de déplacement rapide
+- Adaptation pour personnes handicapés
+- Rester opérationnel 24h/24
