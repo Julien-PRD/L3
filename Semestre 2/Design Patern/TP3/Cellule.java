@@ -11,11 +11,11 @@ public class Cellule{
     }
 
     public void vit(){
-        etat.vit();
+        etat = etat.vit();
     }
 
     public void meurt(){
-        etat.meurt();
+        etat = etat.meurt();
     }
     
     public boolean estVivante(){

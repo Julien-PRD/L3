@@ -58,7 +58,7 @@ public class JeuDeLaVie implements Observable{
     public void notifieObservateurs() {
         for(Observateur o : observateurs){
             o.actualise();
-            System.out.println("actualisation des observateurs");
+            //System.out.println("actualisation des observateurs");
         } 
     }
 
@@ -69,6 +69,7 @@ public class JeuDeLaVie implements Observable{
     public void executeCommande(){
         for(Commande c : commandes){
             c.executer();
+            System.out.println("exécution de " + c);
         }
         commandes.clear();
     }
@@ -86,5 +87,6 @@ public class JeuDeLaVie implements Observable{
         executeCommande();
         notifieObservateurs();
     }
+
 
 }

@@ -17,6 +17,8 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
 		setResizable(false);               //On interdit la redimensionnement de la fenêtre
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
 
+        jeu.attacheObservateur(this);
+
         actualise();
     }
 

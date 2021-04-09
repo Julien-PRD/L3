@@ -4,8 +4,8 @@ public class Test {
         JeuDeLaVie jeu = new JeuDeLaVie();
         jeu.InitialiseGrille();
 
-        for(int i=0 ; i<20 ; i++){
-            for(int j=0 ; j<20 ; j++){
+        for(int i=0 ; i<jeu.getXMax() ; i++){
+            for(int j=0 ; j<jeu.getYMax() ; j++){
                 if(jeu.getGrille(j, i).estVivante() == true){
                     System.out.print(" V ");
                 }else{
@@ -15,20 +15,15 @@ public class Test {
             System.out.println("\n");
         }
 
-        System.out.println("haut gauche - " + jeu.getGrille(0, 0).nombreVoisinesVivantes(jeu));
-        System.out.println("bas gauche - " + jeu.getGrille(19, 0).nombreVoisinesVivantes(jeu));
-        System.out.println("haut droite - " + jeu.getGrille(0, 19).nombreVoisinesVivantes(jeu));
-        System.out.println("bas droite - " + jeu.getGrille(19, 19).nombreVoisinesVivantes(jeu));
-
         JeuDeLaVieUI fenetre = new JeuDeLaVieUI(jeu);
         fenetre.setVisible(true);
 
         while(true){
+            System.out.println("          _______________________          ");
+            System.out.println("_________|  GENERATION SUIVANTE  |_________");
             jeu.calculerGenerationSuivante();
-            System.out.println("---| GENERATION SUIVANTE |---");
-            System.out.println("Cellule test : " + jeu.getGrille(10, 8).nombreVoisinesVivantes(jeu) + " voisin(s)");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

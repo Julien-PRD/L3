@@ -6,7 +6,7 @@ public class VisiteurClassique extends Visiteur {
 
     @Override
     public void visiteCelluleVivante(Cellule cellule) {
-        if( cellule.nombreVoisinesVivantes(jeu) <2 || cellule.nombreVoisinesVivantes(jeu) >3 ){
+        if( cellule.nombreVoisinesVivantes(jeu) <2 || cellule.nombreVoisinesVivantes(jeu) > 3 ){
             jeu.ajouteCommande(new CommandeMeurt(cellule));
         }
     }
