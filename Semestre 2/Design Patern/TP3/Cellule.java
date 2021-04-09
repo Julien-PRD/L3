@@ -25,32 +25,36 @@ public class Cellule{
     public int nombreVoisinesVivantes(JeuDeLaVie jeu){
         int nombreVoisinesVivantes = 0;
 
-        if(jeu.getGrille(y-1, x-1).estVivante() == true){
+        if( ( y-1 >=0 && y-1 < jeu.getYMax() ) && ( x-1 >= 0 && x-1 < jeu.getXMax() ) && ( jeu.getGrille(y-1, x-1).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y, x-1).estVivante() == true){
+        if( ( y >=0 && y < jeu.getYMax() ) && ( x-1 >= 0 && x-1 < jeu.getXMax() ) && ( jeu.getGrille(y, x-1).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y+1, x-1).estVivante() == true){
+        if( ( y+1 >=0 && y+1 < jeu.getYMax() ) && ( x-1 >= 0 && x-1 < jeu.getXMax() ) && ( jeu.getGrille(y+1, x-1).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y-1, x).estVivante() == true){
+        if( ( y-1 >=0 && y-1 < jeu.getYMax() ) && ( x >= 0 && x < jeu.getXMax() ) && ( jeu.getGrille(y-1, x).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y+1, x).estVivante() == true){
+        if( ( y+1 >=0 && y+1 < jeu.getYMax() ) && ( x >= 0 && x < jeu.getXMax() ) && ( jeu.getGrille(y+1, x).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y-1, x+1).estVivante() == true){
+        if( ( y-1 >=0 && y-1 < jeu.getYMax() ) && ( x+1 >= 0 && x+1 < jeu.getXMax() ) && ( jeu.getGrille(y-1, x+1).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y, x+1).estVivante() == true){
+        if( ( y >=0 && 1 < jeu.getYMax() ) && ( x+1 >= 0 && x+1 < jeu.getXMax() ) && ( jeu.getGrille(y, x+1).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
-        if(jeu.getGrille(y+1, x+1).estVivante() == true){
+        if( ( y+1 >=0 && y+1 < jeu.getYMax() ) && ( x+1 >= 0 && x+1 < jeu.getXMax() ) && ( jeu.getGrille(y+1, x+1).estVivante() == true ) ){
             nombreVoisinesVivantes ++;
         }
 
         return nombreVoisinesVivantes;
+    }
+
+    public void accepte(Visiteur visiteur){
+        etat.accepte(visiteur, this);
     }
 
 }

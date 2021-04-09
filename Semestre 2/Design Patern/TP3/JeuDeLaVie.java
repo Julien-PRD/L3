@@ -9,11 +9,13 @@ public class JeuDeLaVie implements Observable{
     private int xMax; //colonnes
     private int yMax; //lignes
     private List<Commande> commandes = new ArrayList<Commande>();
+    private VisiteurClassique visiteur;
 
     public JeuDeLaVie(){
-        xMax = 20;
-        yMax = 20;
+        xMax = 30;
+        yMax = 30;
         grille = new Cellule[xMax][yMax];
+        visiteur = new VisiteurClassique(this);
     }
 
     public void InitialiseGrille(){
@@ -44,20 +46,19 @@ public class JeuDeLaVie implements Observable{
 
     @Override
     public void attacheObservateur(Observateur o) {
-        // TODO Auto-generated method stub
-        
+        observateurs.add(o);
     }
 
     @Override
     public void detacheObservateur(Observateur o) {
-        // TODO Auto-generated method stub
-        
+        observateurs.remove(o);
     }
 
     @Override
     public void notifieObservateurs() {
         for(Observateur o : observateurs){
             o.actualise();
+            System.out.println("actualisation des observateurs");
         } 
     }
 
@@ -70,6 +71,20 @@ public class JeuDeLaVie implements Observable{
             c.executer();
         }
         commandes.clear();
+    }
+
+    public void distribueVisiteur(){
+        for(int i=0 ; i<xMax ; i++){
+            for(int j=0 ; j<yMax ; j++){
+                grille[j][i].accepte(visiteur);
+            }
+        }
+    }
+
+    public void calculerGenerationSuivante(){
+        distribueVisiteur();
+        executeCommande();
+        notifieObservateurs();
     }
 
 }

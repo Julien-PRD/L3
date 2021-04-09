@@ -11,8 +11,8 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
     public JeuDeLaVieUI(JeuDeLaVie jeu){
         this.jeu = jeu;
 
-        setTitle("Jeu De La Vie");   //On donne un titre à l'application
-		setSize(600,600);                  //On donne une taille à notre fenêtre
+        setTitle("Jeu De La Vie");         //On donne un titre à l'application
+		setSize(750,750);                  //On donne une taille à notre fenêtre
 		setLocationRelativeTo(null);       //On centre la fenêtre sur l'écran
 		setResizable(false);               //On interdit la redimensionnement de la fenêtre
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
@@ -31,7 +31,7 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
             for( int y=0 ; y < jeu.getYMax() ; y++){
                 if(jeu.getGrille(x, y).estVivante()){
                     g.setColor(Color.darkGray);
-                    g.fillOval((x + 2)*25, (y+ 2)*25, 15, 15);
+                    g.fillOval((x + 2)*22, (y+ 2)*22, 10, 10);
                 }
             }
         }
