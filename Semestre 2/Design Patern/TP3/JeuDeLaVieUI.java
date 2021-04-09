@@ -1,6 +1,6 @@
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class JeuDeLaVieUI extends JFrame implements Observateur {
 
@@ -10,10 +10,14 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
 
     public JeuDeLaVieUI(JeuDeLaVie jeu){
         this.jeu = jeu;
-        this.setSize(500, 600); // Largeur - Hauteur
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
+
+        setTitle("Jeu De La Vie");   //On donne un titre à l'application
+		setSize(600,600);                  //On donne une taille à notre fenêtre
+		setLocationRelativeTo(null);       //On centre la fenêtre sur l'écran
+		setResizable(false);               //On interdit la redimensionnement de la fenêtre
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+
+        actualise();
     }
 
     @Override
@@ -26,18 +30,12 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
         for(int x=0 ; x<jeu.getXMax() ; x++){
             for( int y=0 ; y < jeu.getYMax() ; y++){
                 if(jeu.getGrille(x, y).estVivante()){
-                    g.fillOval(x*3, y*3, 3, 3);
+                    g.setColor(Color.GREEN);
+                    g.fillOval((x + 1)*50, (y+ 1)*50, 30, 30);
                 }
             }
         }
     }
 
-    public void Interface(){
-        this.setSize(500, 500); // Largeur - Hauteur
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setVisible(true);  //Toujour rendre visible la fenetre
-    }
 
 }
