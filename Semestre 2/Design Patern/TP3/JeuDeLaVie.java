@@ -8,10 +8,11 @@ public class JeuDeLaVie implements Observable{
     private List<Observateur> observateurs = new ArrayList<Observateur>();
     private int xMax; //colonnes
     private int yMax; //lignes
+    private List<Commande> commandes = new ArrayList<Commande>();
 
     public JeuDeLaVie(){
-        xMax = 5;
-        yMax = 5;
+        xMax = 20;
+        yMax = 20;
         grille = new Cellule[xMax][yMax];
     }
 
@@ -58,6 +59,17 @@ public class JeuDeLaVie implements Observable{
         for(Observateur o : observateurs){
             o.actualise();
         } 
+    }
+
+    public void ajouteCommande(Commande c){
+        commandes.add(c);
+    }
+
+    public void executeCommande(){
+        for(Commande c : commandes){
+            c.executer();
+        }
+        commandes.clear();
     }
 
 }

@@ -4,8 +4,8 @@ public class Test {
         JeuDeLaVie jeu = new JeuDeLaVie();
         jeu.InitialiseGrille();
 
-        for(int i=0 ; i<5 ; i++){
-            for(int j=0 ; j<5 ; j++){
+        for(int i=0 ; i<20 ; i++){
+            for(int j=0 ; j<20 ; j++){
                 if(jeu.getGrille(j, i).estVivante() == true){
                     System.out.print(" V ");
                 }else{
