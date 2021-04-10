@@ -19,10 +19,11 @@ public class JeuDeLaVie implements Observable{
      * Constructeur d'un jeu de la vie, avec sa dimension et l'initalisation des différents design patern qui permettent le bon fonctionnement de l'automate
      */
     public JeuDeLaVie(){
-        xMax = 30;
-        yMax = 30;
+        xMax = 45;
+        yMax = 45;
         grille = new Cellule[xMax][yMax];
         visiteur = new VisiteurClassique(this);
+
     }
 
     /**
@@ -41,6 +42,10 @@ public class JeuDeLaVie implements Observable{
                 }
             }
         }
+        System.out.println("          _______________________          ");
+        System.out.println("_________|  GENERATION INITIALE  |_________");
+        //observateurTexte = new ObservateurModeTexte(this);
+
     }
 
     
@@ -115,7 +120,6 @@ public class JeuDeLaVie implements Observable{
     public void executeCommande(){
         for(Commande c : commandes){
             c.executer();
-            System.out.println("exécution de " + c);
         }
         commandes.clear();
     }

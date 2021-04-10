@@ -48,7 +48,7 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
             for( int y=0 ; y < jeu.getYMax() ; y++){
                 if(jeu.getGrille(x, y).estVivante()){
                     g.setColor(Color.darkGray);
-                    g.fillOval((x + 2)*22, (y+ 2)*22, 10, 10);
+                    g.fillOval((x + 2)*15, (y+ 2)*15, 5, 5);
                 }
             }
         }
