@@ -13,26 +13,24 @@ public class JeuDeLaVie implements Observable{
     private int xMax; //colonnes
     private int yMax; //lignes
     private List<Commande> commandes = new ArrayList<Commande>();
-    private VisiteurClassique visiteurClassique;
     private JeuDeLaVieUI jeuUI;
-    //private VisiteurHighLife visiteurHighLife;
-    //private VisiteurDayAndNight visiteurDayAndNight;
 
-    private boolean marche;
+    private Visiteur visiteur;
+
+    private boolean enPause;
     private int vitesse;
 
     /**
      * Constructeur d'un jeu de la vie, avec sa dimension et l'initalisation des différents design patern qui permettent le bon fonctionnement de l'automate
      */
     public JeuDeLaVie(){
-        xMax = 45;
-        yMax = 45;
+        xMax = 67;
+        yMax = 67;
         grille = new Cellule[xMax][yMax];
-        visiteurClassique = new VisiteurClassique(this);
-        //visiteurHighLife = new VisiteurHighLife(this);
-        //visiteurDayAndNight = new VisiteurDayAndNight(this);
 
-        marche = false;
+        visiteur = new VisiteurClassique(this);
+
+        enPause = false;
         vitesse = 500;
     }
 
@@ -144,7 +142,7 @@ public class JeuDeLaVie implements Observable{
             for(int j=0 ; j<yMax ; j++){
                 //grille[j][i].accepte(visiteurClassique);
                 //grille[j][i].accepte(visiteurHighLife);
-                grille[j][i].accepte(visiteurClassique);
+                grille[j][i].accepte(visiteur);
             }
         }
     }
@@ -163,10 +161,13 @@ public class JeuDeLaVie implements Observable{
         notifieObservateurs();   
     }
 
+    /**
+     * Méthode qui lance en boucle le calcul de la génération suivante
+     */
     public void boucleGenerationSuivante(){
         while(true){
-            marche = jeuUI.getPause();
-            if(marche == false){
+            enPause = jeuUI.getPause();
+            if(enPause == false){
                 try {
                     Thread.sleep(vitesse);
                 } catch (InterruptedException e) {
@@ -183,20 +184,38 @@ public class JeuDeLaVie implements Observable{
         }
     }
 
-    public void modifMarche(){
-        if(marche == true){
-            marche = false;
+    /**
+     * Modifie l'état de pause du jeu de la vie
+     */
+    public void modifPause(){
+        if(enPause == true){
+            enPause = false;
         }else{
-            marche = true;
+            enPause = true;
         }
     }
 
+    /**
+     * Méthode qui permet d'avancer d'une seule génération
+     */
     public void avancerUneGeneration(){
         calculerGenerationSuivante();
     }
 
+    /**
+     * Modifie la valeur de la vitesse, en réalité le retard que la boucle va avoir pour passer a la génération suivante
+     * @param v La nouvelle vitesse (retard)
+     */
     public void setVitesse(int v){
         vitesse = v;
+    }
+
+    /**
+     * Permet de changer le visiteur en place sur le jeu de la vie
+     * @param visiteur
+     */
+    public void setVisiteur(Visiteur visiteur){
+        this.visiteur = visiteur;
     }
 
 }
