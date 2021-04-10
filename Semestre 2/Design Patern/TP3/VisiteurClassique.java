@@ -11,7 +11,6 @@ public class VisiteurClassique extends Visiteur {
     public VisiteurClassique(JeuDeLaVie jeu) {
         super(jeu);
     }
-
     
     /** 
      * Méthode qui va instancier et ajouter une nouvelle commande (CommandeMeurt) selon les voisines de la cellule
@@ -23,7 +22,6 @@ public class VisiteurClassique extends Visiteur {
             jeu.ajouteCommande(new CommandeMeurt(cellule));
         }
     }
-
     
     /** 
      * Méthode qui va instancier et ajouter une nouvelle commande (CommandeVit) selon les voisines de la cellule

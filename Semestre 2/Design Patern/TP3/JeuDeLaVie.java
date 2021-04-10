@@ -13,7 +13,13 @@ public class JeuDeLaVie implements Observable{
     private int xMax; //colonnes
     private int yMax; //lignes
     private List<Commande> commandes = new ArrayList<Commande>();
-    private VisiteurClassique visiteur;
+    private VisiteurClassique visiteurClassique;
+    private JeuDeLaVieUI jeuUI;
+    //private VisiteurHighLife visiteurHighLife;
+    //private VisiteurDayAndNight visiteurDayAndNight;
+
+    private boolean marche;
+    private int vitesse;
 
     /**
      * Constructeur d'un jeu de la vie, avec sa dimension et l'initalisation des différents design patern qui permettent le bon fonctionnement de l'automate
@@ -22,8 +28,12 @@ public class JeuDeLaVie implements Observable{
         xMax = 45;
         yMax = 45;
         grille = new Cellule[xMax][yMax];
-        visiteur = new VisiteurClassique(this);
+        visiteurClassique = new VisiteurClassique(this);
+        //visiteurHighLife = new VisiteurHighLife(this);
+        //visiteurDayAndNight = new VisiteurDayAndNight(this);
 
+        marche = false;
+        vitesse = 500;
     }
 
     /**
@@ -44,8 +54,6 @@ public class JeuDeLaVie implements Observable{
         }
         System.out.println("          _______________________          ");
         System.out.println("_________|  GENERATION INITIALE  |_________");
-        //observateurTexte = new ObservateurModeTexte(this);
-
     }
 
     
@@ -96,6 +104,10 @@ public class JeuDeLaVie implements Observable{
         observateurs.remove(o);
     }
 
+    public void setUI(JeuDeLaVieUI jeuUI){
+        this.jeuUI = jeuUI;
+    }
+
     /**
      * Actualise tous les observateurs du jeu
      */
@@ -130,7 +142,9 @@ public class JeuDeLaVie implements Observable{
     public void distribueVisiteur(){
         for(int i=0 ; i<xMax ; i++){
             for(int j=0 ; j<yMax ; j++){
-                grille[j][i].accepte(visiteur);
+                //grille[j][i].accepte(visiteurClassique);
+                //grille[j][i].accepte(visiteurHighLife);
+                grille[j][i].accepte(visiteurClassique);
             }
         }
     }
@@ -142,10 +156,47 @@ public class JeuDeLaVie implements Observable{
      *  3. actualiser les observateurs
      */
     public void calculerGenerationSuivante(){
+        System.out.println("          _______________________          ");
+        System.out.println("_________|  GENERATION SUIVANTE  |_________");
         distribueVisiteur();
         executeCommande();
-        notifieObservateurs();
+        notifieObservateurs();   
     }
 
+    public void boucleGenerationSuivante(){
+        while(true){
+            marche = jeuUI.getPause();
+            if(marche == false){
+                try {
+                    Thread.sleep(vitesse);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                calculerGenerationSuivante();
+            }else{
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } 
+            }
+        }
+    }
+
+    public void modifMarche(){
+        if(marche == true){
+            marche = false;
+        }else{
+            marche = true;
+        }
+    }
+
+    public void avancerUneGeneration(){
+        calculerGenerationSuivante();
+    }
+
+    public void setVitesse(int v){
+        vitesse = v;
+    }
 
 }
