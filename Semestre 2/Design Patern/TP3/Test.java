@@ -1,3 +1,7 @@
+/**
+ * Programme de test du jeu de la vie
+ * @author Julien PROUDY
+ */
 public class Test {
     
     public static void main(String[] args) {
